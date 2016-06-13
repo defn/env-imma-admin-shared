@@ -1,0 +1,9 @@
+{
+  "require": [
+    "env-imma-dev",
+    "app-nat",
+    "app-vpn",
+    "app-jump",
+    "app-consul"
+  ]
+}
