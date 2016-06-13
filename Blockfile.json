@@ -1,6 +1,6 @@
 {
   "require": [
-    "env-imma-dev",
+    "env-imma-admin",
     "app-nat",
     "app-vpn",
     "app-jump",

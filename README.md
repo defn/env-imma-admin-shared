@@ -1,1 +1,1 @@
-Visit http://defn.sh/env-imma-dev/ or open `docs/index.html`
+Visit http://defn.sh/env-imma-admin-shared/ or open `docs/index.html`
