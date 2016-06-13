@@ -55,7 +55,7 @@ module "consul" {
 }
 
 module "cache" {
-  source = "../app-consul"
+  source = "../app-cache"
 
   provider_region = "${var.provider_region}"
   bucket_remote_state = "${var.bucket_remote_state}"
@@ -64,5 +64,5 @@ module "cache" {
 
   az_count = "${var.az_count}" 
 
-  cidr_blocks = "${var.consul_cidrs}"
+  cidr_blocks = "${var.cache_cidrs}"
 }

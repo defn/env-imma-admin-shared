@@ -9,3 +9,4 @@ variable "nat_cidrs" {}
 variable "vpn_cidrs" {}
 variable "jump_cidrs" {}
 variable "consul_cidrs" {}
+variable "cache_cidrs" {}
