@@ -4,6 +4,7 @@
     "app-nat",
     "app-vpn",
     "app-jump",
-    "app-consul"
+    "app-consul",
+    "app-cache"
   ]
 }
