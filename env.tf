@@ -1,1 +1,1 @@
-../module-aws-env/env.tf
+../env-xxx/env.tf
