@@ -4,6 +4,8 @@ variable "jump_cidrs" {}
 variable "consul_cidrs" {}
 variable "cache_cidrs" {}
 
+variable "az_count" {}
+
 provider "aws" { }
 
 module "nat" {
@@ -13,9 +15,9 @@ module "nat" {
   context_org = "${var.context_org}"
   context_env = "${var.context_env}"
 
-  az_count = "${var.az_count}" 
-
   cidr_blocks = "${var.nat_cidrs}"
+
+  az_count = "${var.az_count}"
 }
 
 module "vpn" {
@@ -25,9 +27,9 @@ module "vpn" {
   context_org = "${var.context_org}"
   context_env = "${var.context_env}"
 
-  az_count = "${var.az_count}" 
-
   cidr_blocks = "${var.vpn_cidrs}"
+
+  az_count = "${var.az_count}"
 }
 
 module "jump" {
@@ -37,9 +39,9 @@ module "jump" {
   context_org = "${var.context_org}"
   context_env = "${var.context_env}"
 
-  az_count = "${var.az_count}" 
-
   cidr_blocks = "${var.jump_cidrs}"
+
+  az_count = "${var.az_count}"
 }
 
 module "consul" {
@@ -49,9 +51,9 @@ module "consul" {
   context_org = "${var.context_org}"
   context_env = "${var.context_env}"
 
-  az_count = "${var.az_count}" 
-
   cidr_blocks = "${var.consul_cidrs}"
+
+  az_count = "${var.az_count}"
 }
 
 module "cache" {
@@ -61,7 +63,7 @@ module "cache" {
   context_org = "${var.context_org}"
   context_env = "${var.context_env}"
 
-  az_count = "${var.az_count}" 
-
   cidr_blocks = "${var.cache_cidrs}"
+
+  az_count = "${var.az_count}"
 }
