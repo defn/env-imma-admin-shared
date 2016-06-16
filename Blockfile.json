@@ -5,7 +5,6 @@
     "app-vpn",
     "app-jump",
     "app-consul",
-    "app-cache",
-    "env-imma-admin"
+    "app-cache"
   ]
 }
