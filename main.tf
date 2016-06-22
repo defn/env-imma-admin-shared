@@ -1,12 +1,24 @@
-variable "nat_cidrs"    { default = [ "172.16.0.64/28", "172.16.0.80/28" ] }
-variable "vpn_cidrs"    { default = [ "172.16.0.96/28", "172.16.0.112/28" ] }
-variable "jump_cidrs"   { default = [ "172.16.0.128/28", "172.16.0.144/28" ] }
-variable "consul_cidrs" { default = [ "172.16.0.160/28", "172.16.0.176/28" ] }
-variable "cache_cidrs"  { default = [ "172.16.0.192/28", "172.16.0.208/28" ] }
-
 variable "az_count"     { default = 2 }
 
 provider "aws" { }
+
+data "terraform_remote_state" "env" {
+  backend = "s3"
+  config {
+    bucket = "${var.bucket_remote_state}"
+    key = "${var.bucket_remote_state}/env-${var.context_org}-${var.context_env}.tfstate"
+  }
+}
+
+resource "null_resource" "cidrs" {
+  triggers = {
+    nat    = "${data.terraform_remote_state.env.vpc_net16}.0.64/28 ${data.terraform_remote_state.env.vpc_net16}.0.80/28"
+    vpn    = "${data.terraform_remote_state.env.vpc_net16}.0.96/28 ${data.terraform_remote_state.env.vpc_net16}.0.112/28"
+    jump   = "${data.terraform_remote_state.env.vpc_net16}.0.128/28 ${data.terraform_remote_state.env.vpc_net16}.0.144/28"
+    consul = "${data.terraform_remote_state.env.vpc_net16}.0.160/28 ${data.terraform_remote_state.env.vpc_net16}.0.176/28"
+    cache  = "${data.terraform_remote_state.env.vpc_net16}.0.192/28 ${data.terraform_remote_state.env.vpc_net16}.0.208/28"
+  }
+}
 
 module "nat" {
   source = "../app-nat"
@@ -15,7 +27,7 @@ module "nat" {
   context_org = "${var.context_org}"
   context_env = "${var.context_env}"
 
-  cidr_blocks = "${var.nat_cidrs}"
+  cidr_blocks = "${split(" ",null_resource.cidrs.triggers.nat)}"
 
   az_count = "${var.az_count}"
 }
@@ -27,7 +39,7 @@ module "vpn" {
   context_org = "${var.context_org}"
   context_env = "${var.context_env}"
 
-  cidr_blocks = "${var.vpn_cidrs}"
+  cidr_blocks = "${split(" ",null_resource.cidrs.triggers.vpn)}"
 
   az_count = "${var.az_count}"
 }
@@ -39,7 +51,7 @@ module "jump" {
   context_org = "${var.context_org}"
   context_env = "${var.context_env}"
 
-  cidr_blocks = "${var.jump_cidrs}"
+  cidr_blocks = "${split(" ",null_resource.cidrs.triggers.jump)}"
 
   az_count = "${var.az_count}"
 }
@@ -51,7 +63,7 @@ module "consul" {
   context_org = "${var.context_org}"
   context_env = "${var.context_env}"
 
-  cidr_blocks = "${var.consul_cidrs}"
+  cidr_blocks = "${split(" ",null_resource.cidrs.triggers.consul)}"
 
   az_count = "${var.az_count}"
 }
@@ -63,7 +75,7 @@ module "cache" {
   context_org = "${var.context_org}"
   context_env = "${var.context_env}"
 
-  cidr_blocks = "${var.cache_cidrs}"
+  cidr_blocks = "${split(" ",null_resource.cidrs.triggers.cache)}"
 
   az_count = "${var.az_count}"
 }
