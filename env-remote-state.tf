@@ -1,1 +1,1 @@
-../env-imma-admin/env-remote-state.tf
+../env-imma-dev/env-remote-state.tfexport
