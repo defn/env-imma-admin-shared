@@ -2,14 +2,6 @@ variable "az_count"     { default = 2 }
 
 provider "aws" { }
 
-data "terraform_remote_state" "env" {
-  backend = "s3"
-  config {
-    bucket = "${var.bucket_remote_state}"
-    key = "${var.bucket_remote_state}/env-${var.context_org}-${var.context_env}.tfstate"
-  }
-}
-
 resource "null_resource" "cidrs" {
   triggers = {
     nat    = "${data.terraform_remote_state.env.vpc_net16}.0.64/28 ${data.terraform_remote_state.env.vpc_net16}.0.80/28"
