@@ -26,6 +26,14 @@ module "nat" {
   app_name = "nat"
 }
 
+output "nat_ids" {
+  value = [ "${module.nat.nat_ids}" ]
+}
+
+output "nat_eips" {
+  value = [ "${module.nat.nat_eips}" ]
+}
+
 module "vpn" {
   source = "../app-vpn"
 
