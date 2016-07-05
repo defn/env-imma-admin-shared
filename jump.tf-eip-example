@@ -17,6 +17,11 @@ module "jump" {
   asg_max = 2
 }
 
+resource "aws_eip_association" "jump" {
+  instance_id = "${element(module.jump.instances,0)}"
+  allocation_id = "${module.jump.allocation_id}"
+}
+
 resource "aws_security_group_rule" "jump_icmp" {
   security_group_id = "${module.jump.default_sg_id}"
 
