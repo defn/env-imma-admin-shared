@@ -37,6 +37,9 @@ module "jump" {
   az_count = "${var.az_count}"
 
   app_name = "dump"
+
+  asg_min = 1
+  asg_max = 1
 }
 
 module "consul" {
