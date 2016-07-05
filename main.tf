@@ -42,6 +42,14 @@ module "jump" {
   asg_max = 1
 }
 
+output "jump_instances" {
+  value = [ "${module.jump.instances}" ]
+}
+
+output "jump_eip" {
+  value = "${module.jump.eip}"
+}
+
 module "consul" {
   source = "../app-consul"
 
