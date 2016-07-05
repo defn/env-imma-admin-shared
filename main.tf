@@ -25,36 +25,6 @@ module "vpn" {
   app_name = "vpn"
 }
 
-module "jump" {
-  source = "../app-jump"
-
-  bucket_remote_state = "${var.bucket_remote_state}"
-  context_org = "${var.context_org}"
-  context_env = "${var.context_env}"
-
-  cidr_blocks = "${split(" ",null_resource.cidrs.triggers.jump)}"
-
-  az_count = "${var.az_count}"
-
-  app_name = "jump"
-
-  asg_min = 1
-  asg_max = 1
-}
-
-resource "aws_eip_association" "jump" {
-  instance_id = "${element(module.jump.instances,0)}"
-  allocation_id = "${module.jump.allocation_id}"
-}
-
-output "jump_instances" {
-  value = [ "${module.jump.instances}" ]
-}
-
-output "jump_eip" {
-  value = "${module.jump.eip}"
-}
-
 module "consul" {
   source = "../app-consul"
 
