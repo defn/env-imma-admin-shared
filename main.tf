@@ -42,6 +42,11 @@ module "jump" {
   asg_max = 1
 }
 
+resource "aws_eip_association" "jump" {
+  instance_id = "${element(module.jump.instances,0)}"
+  allocation_id = "${module.jump.allocation_id}"
+}
+
 output "jump_instances" {
   value = [ "${module.jump.instances}" ]
 }
