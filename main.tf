@@ -21,6 +21,7 @@ module "vpn" {
   cidr_blocks = "${split(" ",null_resource.cidrs.triggers.vpn)}"
 
   az_count = "${var.az_count}"
+  nat_count = "${var.az_count}"
 
   app_name = "vpn"
 }
@@ -35,6 +36,7 @@ module "consul" {
   cidr_blocks = "${split(" ",null_resource.cidrs.triggers.consul)}"
 
   az_count = "${var.az_count}"
+  nat_count = "${var.az_count}"
 
   app_name = "consul"
 }
@@ -49,6 +51,7 @@ module "cache" {
   cidr_blocks = "${split(" ",null_resource.cidrs.triggers.cache)}"
 
   az_count = "${var.az_count}"
+  nat_count = "${var.az_count}"
 
   app_name = "cache"
 }

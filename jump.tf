@@ -8,6 +8,8 @@ module "jump" {
   cidr_blocks = "${split(" ",null_resource.cidrs.triggers.jump)}"
 
   az_count = "${var.az_count}"
+  nat_count = 0
+  igw_count = "${var.az_count}"
 
   app_name = "jump"
 
