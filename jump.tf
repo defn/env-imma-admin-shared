@@ -13,8 +13,8 @@ module "jump" {
 
   app_name = "jump"
 
-  asg_min = 1
-  asg_max = 1
+  asg_min = 2
+  asg_max = 2
 }
 
 resource "aws_eip_association" "jump" {
