@@ -13,8 +13,8 @@ module "jump" {
 
   app_name = "jump"
 
-  asg_min = 2
-  asg_max = 2
+  asg_min = 1
+  asg_max = 1
 }
 
 resource "aws_security_group_rule" "jump_icmp" {
