@@ -1,4 +1,4 @@
-variable "az_count"     { default = 2 }
+variable "az_count" { default = 2 }
 
 provider "aws" { }
 

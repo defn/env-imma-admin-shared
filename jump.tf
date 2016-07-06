@@ -12,9 +12,6 @@ module "jump" {
   igw_count = "${var.az_count}"
 
   app_name = "jump"
-
-  asg_min = 1
-  asg_max = 1
 }
 
 resource "aws_security_group_rule" "jump_icmp" {
