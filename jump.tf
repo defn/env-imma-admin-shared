@@ -11,6 +11,9 @@ module "jump" {
   nat_count = 0
   igw_count = "${var.az_count}"
 
+  asg_min = 1
+  asg_max = 1
+
   app_name = "jump"
 }
 
